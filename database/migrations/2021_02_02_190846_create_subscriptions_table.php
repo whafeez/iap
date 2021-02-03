@@ -17,9 +17,10 @@ class CreateSubscriptionsTable extends Migration
             $table->id();
             $table->string('item_name');
             $table->string('receipt');
-            $table->timestamp('start_end');
+            $table->timestamp('start_date');
             $table->timestamp('expiry_date');
             $table->tinyInteger('status')->comment('1-started,2-renewed,3-cancelled,4-expired');
+            $table->string('client_token');
             $table->string('os');
             $table->timestamps();
         });
