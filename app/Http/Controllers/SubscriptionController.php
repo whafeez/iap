@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use App\Repositories\SubscriptionRepository;
+use App\Repositories\VerificationRepository;
 
 class SubscriptionController extends Controller
 {
@@ -34,15 +35,18 @@ class SubscriptionController extends Controller
         {
             return response(['errors'=>$validator->errors()->all()], 422);
         }
-        $response = Http::post('http://127.0.0.1:8000/verify', [
-            'receipt_hash' => $request->get('receipt_hash')
-        ]);
+        $response = VerificationRepository::verifySubscription($request->get('receipt_hash',$request->get('os')));
+        
         if ($response['message']) {
             $expiry_date = $response['expiry_date'];
+        } else {
+            $result = ['message' => false];
         }
         $data = $request->all();
         SubscriptionRepository::makeSubScription($data);
-
+        $result = ['message' => true, 'expiry_date' => $expiry_date];
+        return response($result, 200);
+        
     }
 
     /**

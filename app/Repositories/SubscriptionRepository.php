@@ -13,7 +13,7 @@ class SubscriptionRepository extends BaseRepository {
         $subscription->item_name = $request['item_name'];
         $subscription->receipt = $request['receipt'];
         $subscription->expiry_date = $request['expiry_date'];
-        $subscription->status = $request['status'];
+        $subscription->status = 'started';
         $subscription->os = $request['os'];
         $subscription->save();
    }
