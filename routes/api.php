@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('purchaseSubscription','SubscriptionController@create');
+Route::get('subscriptionworker','WorkerController@index');
