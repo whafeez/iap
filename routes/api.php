@@ -18,5 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('purchaseSubscription','SubscriptionController@create');
-Route::get('subscriptionworker','WorkerController@index');
+Route::post('registerDevice','RegistrationController@create');
+
+Route::middleware('customauth:api')->post('purchaseSubscription','SubscriptionController@create');
+Route::middleware('customauth:api')->get('subscriptionworker','WorkerController@index');

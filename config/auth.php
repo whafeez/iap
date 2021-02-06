@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'devices',
     ],
 
     /*
@@ -46,6 +46,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'devices' => [
+            'driver' => 'passport',
+            'provider' => 'devices',
+     ],
     ],
 
     /*
@@ -69,6 +73,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'devices' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DeviceTable::class,
         ],
 
         // 'users' => [
@@ -95,6 +103,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'devices' => [
+             'provider' => 'devices',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

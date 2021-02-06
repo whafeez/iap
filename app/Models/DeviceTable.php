@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class DeviceTable extends Model
+class DeviceTable extends Authenticatable
 {
-    use HasFactory;
+        use HasApiTokens, HasFactory, Notifiable;
 
       /**
      * The attributes that are mass assignable.
