@@ -22,3 +22,9 @@ Route::post('registerDevice','RegistrationController@create');
 
 Route::middleware('customauth:api')->post('purchaseSubscription','SubscriptionController@create');
 Route::middleware('customauth:api')->get('subscriptionworker','WorkerController@index');
+Route::middleware('customauth:api')->post('/verifyPlaySotreApp','VerifyGoogleAppController@index');
+Route::middleware('customauth:api')->post('/verifyAppleSotreApp','VerifyiOSAppController@index');
+Route::middleware('customauth:api')->post('/verifyAppleSotreSubscription','VerifyiOSAppController@verifyrecord');
+Route::middleware('customauth:api')->post('/verifyPlaySotreSubscription','VerifyGoogleAppController@verifyrecord');
+Route::middleware('customauth:api')->post('/verifyPlaySotreSubscription','VerifyGoogleAppController@verifyrecord');
+Route::middleware('customauth:api')->post('/callback','CallBackSystemController@index');

@@ -16,6 +16,7 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'devices',
+
     ],
 
     /*
@@ -50,6 +51,7 @@ return [
             'driver' => 'passport',
             'provider' => 'devices',
      ],
+
     ],
 
     /*
@@ -78,6 +80,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\DeviceTable::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -113,6 +116,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
     ],
 
     /*

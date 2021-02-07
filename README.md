@@ -1,62 +1,45 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## About In App Verification System
+- This is a system which is used as a verification of in app purchases made on google play store and apple store in iOS games, this is mocking as real system while I've integrated a functionality which is not sending requests to iOS or Google for real, rather it's verification algorithm consist on the following scenario.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Algorithm
+- If the last character of the receipt string value is an odd number it must return true otherwise false.
+- When it returns true there should be another info about expire date (Y-m-d H:i:s)
+## Instllation
+- git clone repo
+- cd to cloned project directory
+- run command composer install
+- if needed run command php artisan key:generate
+- create database with any name and use this name in .env 
+- after mentioning database name, username, and password run below command
+- php artisan migrate
+### API End Points
+## Device registration API
+- http://127.0.0.1:8080/api/registerDevice (Device registration API that will return client_token)
+- Request Example : {
+    "uID"   :   1,
+    "appID" :   "12sde8",
+    "language"  :   "en",
+    "deviceID"  :   "256850980948",
+    "operating_system"  :   "android"
+    } 
+- Response: 
+{
+    "message": "register OK",
+    "client_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmY1M2E5YjkzMjQ1MTk1ODNiNDZhMzQxZTFjODc4M2VjMDkyYmM1N2RkMzMzOTNiZDYxMjZkMWVmMzFjNTk4NTY0MmMyMzAwZjVmNDliOTIiLCJpYXQiOjE2MTI3MDE1NDQsIm5iZiI6MTYxMjcwMTU0NCwiZXhwIjoxNjQ0MjM3NTQ0LCJzdWIiOiI4Iiwic2NvcGVzIjpbXX0.afKia0H69SqXX9SChAEVl58PTLuFh-OR9S8Wnp_GpU72eE9jAVxkcIeGFoRyxXmJ-km_CnacG2TaTGiTueo8_tcE1YGm3tFlMX2b1TZo3Cz3wjXWgWOwv0Jx7-2BWqMP0bW7FUI36CC624XtDkVNCOw5DhjL84jcTicyg4aOOE2h6Cpv-Y3L3qq7s5DlkrqtO9OhQu4OANXNnOMj-zitovLQuXlzXHIbphsxxCXpvbRm76CJawB2uw-QiZKxR7LONfpStgkq9TYzJD4Ls6rkm5_MfXF6KnCczKhg-R-Arjt2NwbemndO4nt49KOL3uixxqxLwRGKMyy7dBkYQJLht6y9E6VuNWuCCggVZnSna9d7AJSGIzJh1V7Uo79Z-3GlAkbu6rkgJut3utvPTWY4aWKIEHaA-cd7-SaHUgGYNEFzkqUCxZwWevc7EROfBMdeyKZXcagQ8wIpNpK-gn7oRKpx5vrvXbC3bNfkRnfo6XYuwcsVi9iY5ckAZx2psCyi4By2BS3uNFT82dp5iZWYNppA-U6t6MiAqz2JUk-8qr89I2HzaPPXXjJMmrCL6MiSjtbSUYIgyExPfN4zFbW1Al_gGy5x1kDXilDb2mUuR2wbeCOjPn_RnERuYSJJuWnFZDWgeRF1jWfE8CYmeqTPJzbPe4Jo_Ge3G1bJEhdx3d4"
+}
+## Purchase Subscription API
+- http://127.0.0.1:8080/api/purchaseSubscription
+- Request Example : {
+    "client_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmY1M2E5YjkzMjQ1MTk1ODNiNDZhMzQxZTFjODc4M2VjMDkyYmM1N2RkMzMzOTNiZDYxMjZkMWVmMzFjNTk4NTY0MmMyMzAwZjVmNDliOTIiLCJpYXQiOjE2MTI3MDE1NDQsIm5iZiI6MTYxMjcwMTU0NCwiZXhwIjoxNjQ0MjM3NTQ0LCJzdWIiOiI4Iiwic2NvcGVzIjpbXX0.afKia0H69SqXX9SChAEVl58PTLuFh-OR9S8Wnp_GpU72eE9jAVxkcIeGFoRyxXmJ-km_CnacG2TaTGiTueo8_tcE1YGm3tFlMX2b1TZo3Cz3wjXWgWOwv0Jx7-2BWqMP0bW7FUI36CC624XtDkVNCOw5DhjL84jcTicyg4aOOE2h6Cpv-Y3L3qq7s5DlkrqtO9OhQu4OANXNnOMj-zitovLQuXlzXHIbphsxxCXpvbRm76CJawB2uw-QiZKxR7LONfpStgkq9TYzJD4Ls6rkm5_MfXF6KnCczKhg-R-Arjt2NwbemndO4nt49KOL3uixxqxLwRGKMyy7dBkYQJLht6y9E6VuNWuCCggVZnSna9d7AJSGIzJh1V7Uo79Z-3GlAkbu6rkgJut3utvPTWY4aWKIEHaA-cd7-SaHUgGYNEFzkqUCxZwWevc7EROfBMdeyKZXcagQ8wIpNpK-gn7oRKpx5vrvXbC3bNfkRnfo6XYuwcsVi9iY5ckAZx2psCyi4By2BS3uNFT82dp5iZWYNppA-U6t6MiAqz2JUk-8qr89I2HzaPPXXjJMmrCL6MiSjtbSUYIgyExPfN4zFbW1Al_gGy5x1kDXilDb2mUuR2wbeCOjPn_RnERuYSJJuWnFZDWgeRF1jWfE8CYmeqTPJzbPe4Jo_Ge3G1bJEhdx3d4",
+    "receipt_hash" : "13213213546549846513213548",
+    "os":"android",
+    "item_name" : "coins"
+}
+- Response: {
+    "message": true,
+    "expiry_date": "2021-08-07 15:58:34"
+}
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Worker
+### Subscription worker api call
+- http://127.0.0.1:8080/api/subscriptionworker
