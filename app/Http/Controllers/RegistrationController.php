@@ -41,8 +41,8 @@ class RegistrationController extends Controller
 
         $record = DeviceTable::where(['appID'=> $request['appID'],'deviceID'=>$request['deviceID']])->get();
         if ($record->count() > 0) {
-          $token =  $record->get('client_token');
-          $result = ['message' => 'already registered please use your client token to make requests.',"client_token" => null];
+          $token = RegistrationRepository::getClientToken();
+          $result = ['message' => 'already registered',"client_token" => $token];
         } else {
             $response = RegistrationRepository::registerDevice($request->all());
             $result = ['message' => 'register OK', "client_token" => $response];

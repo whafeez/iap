@@ -7,17 +7,19 @@ use Illuminate\Support\Facades\Http;
 
 class VerificationRepository extends BaseRepository {
 
-    public static function verifySubscription($receipt_hash,$os)
+    public static function verifySubscription(array $request)
     {
+        $receipt_hash = $request['receipt_hash'];
+        $os = $request['os'];
     	$remote_url = \config('appurl.url');
         if ($receipt_hash != null || $receipt_hash != '') {
 
-        	if ($os == 'Android') {
-	            $response = Http::post($remote_url.'/verifyPlaySotreApp', [
+        	if ($os == 'android') {
+	            $response = Http::post($remote_url.'/api/verifyPlaySotreApp', [
 	            'receipt_hash' => $receipt_hash
 	            ]);
             } else if($os == 'iOS') {
-            	$response = Http::post($remote_url.'/verifyAppleSotreApp', [
+            	$response = Http::post($remote_url.'/api/verifyAppleSotreApp', [
 	            'receipt_hash' => $receipt_hash
 	            ]);
             }

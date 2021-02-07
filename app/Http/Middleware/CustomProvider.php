@@ -20,9 +20,7 @@ class CustomProvider
         if(!empty(trim($request->input('client_token')))){
 
         $is_exists = DeviceTable::where([
-            'appID'=> $request['appID'],
-            'deviceID'=>$request['deviceID'],
-            'uID' => $request['uID']
+            'client_token'=> $request->input('client_token')
         ])->exists();
         if($is_exists){
             return $next($request);

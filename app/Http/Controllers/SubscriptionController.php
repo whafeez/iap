@@ -35,15 +35,15 @@ class SubscriptionController extends Controller
         {
             return response(['errors'=>$validator->errors()->all()], 422);
         }
-        $response = VerificationRepository::verifySubscription($request->get('receipt_hash',$request->get('os')));
-        
+        $response = VerificationRepository::verifySubscription($request->all());
+        $response = json_decode($response,true);
         if ($response['message']) {
             $expiry_date = $response['expiry_date'];
         } else {
             $result = ['message' => false];
         }
         $data = $request->all();
-        SubscriptionRepository::makeSubScription($data);
+        SubscriptionRepository::makeSubScription($data,$expiry_date);
         $result = ['message' => true, 'expiry_date' => $expiry_date];
         return response($result, 200);
         

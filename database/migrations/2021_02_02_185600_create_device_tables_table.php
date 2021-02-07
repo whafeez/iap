@@ -20,7 +20,7 @@ class CreateDeviceTablesTable extends Migration
             $table->string('deviceID');
             $table->string('language');
             $table->string('operating_system');
-            $table->string('client_token')->unique();
+            $table->text('client_token')->unique();
             $table->timestamps();
         });
     }
