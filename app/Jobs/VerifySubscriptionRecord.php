@@ -32,7 +32,7 @@ class VerifySubscriptionRecord implements ShouldQueue
     public function handle()
     {
          foreach ($this->subscriptions as $key => $value) {
-            $response = VerificationRepository::verifyRecords($value->receipt_hash,$value->os)); 
+            $response = VerificationRepository::verifyRecords($value->receipt_hash,$value->os); 
         }
     }
 }
